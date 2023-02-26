@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 //Clase utilizada para recibir objetos de la petición JSON (origen)
 public class Origin {
     //Obtiene la url de los personajes origen de este planeta
+    //Obtiene la url de los personajes origen de este planeta
     @SerializedName("url")
     @Expose
     private String urlOrigen;
@@ -19,15 +20,8 @@ public class Origin {
         return urlOrigen;
     }
 
-    public void setUrlOrigen(String urlOrigen) {
-        this.urlOrigen = urlOrigen;
-    }
-
     public String getNameOrigen() {
         return nameOrigen;
     }
 
-    public void setNameOrigen(String nameOrigen) {
-        this.nameOrigen = nameOrigen;
-    }
 }

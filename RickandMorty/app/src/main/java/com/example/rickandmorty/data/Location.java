@@ -12,7 +12,7 @@ public class Location {
     private String urlLocation;
 
     //Obtiene el nombre de la locacización actual
-    @SerializedName("name")
+    @SerializedName("nam    e")
     @Expose
     private String nameLocation;
 

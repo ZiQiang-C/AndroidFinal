@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.rickandmorty.R;
 import com.example.rickandmorty.data.PaginaRespuesta;
@@ -22,8 +24,10 @@ public class MainActivity extends AppCompatActivity implements PersonajeAdapter.
     RecyclerView personajeRecycler;
     PersonajesViewModel vm;
     LiveData<PaginaRespuesta> data;
-
+    private static String siguientePagina;
+    private static String volverPagina;
     public static String numero="1";
+    public static int paginaActual;
     public static ActivityResultLauncher resultadoLauncher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements PersonajeAdapter.
 
 
         BSiguiente = findViewById(R.id.BSiguiente);
-        BVolver = findViewById(R.id.BSiguiente);
+        BVolver = findViewById(R.id.BVolver);
         personajeRecycler = findViewById(R.id.PersonajesRecycler);
 
         //Vainas del Recycler y el adapter
@@ -50,9 +54,18 @@ public class MainActivity extends AppCompatActivity implements PersonajeAdapter.
 
         //Observador MutableLiveData
         data.observe(this, (data) ->{
-            adapter.setResults(data.getPersonajesRespuestas());
-        });
+            adapter.setResults(data.getPersonajes());
 
+
+            //Obtiene la siguiente pagina
+            siguientePagina = data.getInfopage().getNext();
+            String pagina = siguientePagina.replace("https://rickandmortyapi.com/api/character?page=","");
+             paginaActual = (Integer.parseInt(pagina)-1);
+            //Obtiene la url para volver
+            volverPagina = data.getInfopage().getPrev();
+
+        });
+        Log.d("1",volverPagina+"");
         vm.buscarPagina(numero);
 
         //Launcher Results
@@ -61,8 +74,29 @@ public class MainActivity extends AppCompatActivity implements PersonajeAdapter.
 
         });
 
-    }
+        BSiguiente.setOnClickListener(view -> {
+            if (siguientePagina != null) {
+            //Hace una nueva petición
+            vm.siguientePagina(siguientePagina);
 
+            }else{
+                Toast.makeText(this,"no hay",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //Volver página
+        BVolver.setOnClickListener(view -> {
+
+            //Hace una nueva peticion
+            if (volverPagina != null) {
+                vm.volverPagina(volverPagina);
+            }else{
+                Toast.makeText(this,"no hay",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+    }
     @Override
     public void onItemClick(int position) {
         envio(position);
@@ -71,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements PersonajeAdapter.
     private void envio(int position) {
         Intent intent = new Intent(MainActivity.this,MainActivityDetalle.class);
         intent.putExtra("position",position);
-
+        intent.putExtra("page",paginaActual);
         resultadoLauncher.launch(intent);
+
     }
 }

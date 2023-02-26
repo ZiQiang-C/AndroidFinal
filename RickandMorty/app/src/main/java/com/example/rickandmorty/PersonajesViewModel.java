@@ -20,19 +20,27 @@ public class PersonajesViewModel extends AndroidViewModel {
     }
     public void init() {
         personajeRepository = new PersonajeRepository();
-        paginaRespuestaLiveData = personajeRepository.getPaginaRespuestaLiveData();
-        personajeRespuestaLiveData = personajeRepository.getPersonajesRespuestaLiveData();
+        paginaRespuestaLiveData = personajeRepository.getPaginasRespuestaLiveData();
+        personajeRespuestaLiveData = personajeRepository.getPersonajeRespuestaLiveData();
 
     }
     //Métodos que actualizan el Mutable
-    public void buscarPersonaje(int id) {
+
+    public void buscarPersonaje(String id) {
         personajeRepository.buscarPersonaje(id);
     }
-
     //métodos que actualizan el Mutable
     public void buscarPagina (String page) {
         personajeRepository.buscarPagina(page);
     }
+    /*public void buscarPagina2 (String page,String id){
+        personajeRepository.buscarPagina2(page,id);
+    }*/
+    public void siguientePagina(String peticionSiguiente) {personajeRepository.siguientePagina(peticionSiguiente);};
+
+    //Hace nueva petición volver a la anterior
+    public void volverPagina(String peticionVolver) {personajeRepository.volverPagina(peticionVolver);};
+
     public LiveData<PaginaRespuesta> getPaginaRespuestaLiveData() {
         return paginaRespuestaLiveData;
     }

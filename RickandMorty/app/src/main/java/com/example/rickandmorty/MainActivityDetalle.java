@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.rickandmorty.data.PaginaRespuesta;
@@ -18,7 +19,7 @@ import java.util.List;
 public class MainActivityDetalle extends AppCompatActivity {
 
     ImageView Eimage;
-    TextView nombre,estado,especie;
+    TextView nombre,estado,especie,id;
     PersonajesViewModel vm;
     LiveData<PaginaRespuesta> data;
 
@@ -31,24 +32,25 @@ public class MainActivityDetalle extends AppCompatActivity {
         nombre=findViewById(R.id.Dnombre);
         estado=findViewById(R.id.Destado);
         especie=findViewById(R.id.Despecie);
+        id=findViewById(R.id.D_id);
+        int position =getIntent().getIntExtra("position",0);
+        int page=getIntent().getIntExtra("page",0);
 
-        int position =getIntent().getIntExtra("posicio",0);
 
-        String local=String.valueOf(position);
         vm = new ViewModelProvider(this).get(PersonajesViewModel.class);
         vm.init();
         data = vm.getPaginaRespuestaLiveData();
 
-        vm.buscarPagina(local);
+        vm.buscarPagina(page+"");
         data.observe(this,(data)->{
 
-            results = data.getPersonajesRespuestas();
+            results = data.getPersonajes();
             Personajes pagina=results.get(position);
 
             nombre.setText(pagina.getName());
             especie.setText(pagina.getSpecies());
             estado.setText(pagina.getStatus());
-
+            id.setText(pagina.getId());
             if (pagina.getImagelink() != null) {
                 String imageUrl = pagina.getImagelink()
                         .replace("http://", "https://");

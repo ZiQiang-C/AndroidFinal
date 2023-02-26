@@ -20,7 +20,7 @@ public class PaginaRespuesta {
         return infopage;
     }
 
-    public List<Personajes> getPersonajesRespuestas() {
+    public List<Personajes> getPersonajes() {
         return personajes;
     }
 }

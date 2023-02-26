@@ -1,5 +1,6 @@
 package com.example.rickandmorty;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,11 +48,13 @@ public class PersonajeAdapter extends RecyclerView.Adapter <PersonajeAdapter.Per
                     int position = holder.getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         mListener.onItemClick(position);
+                        String id=personajeRespuesta.getId();
+
                     }
                 }
             }
         });
-        //En imágenes
+        //En     imágenes
         if (personajeRespuesta.getImagelink() != null) {
 
             //No hace falta hacer replace ya que es HTTPS
