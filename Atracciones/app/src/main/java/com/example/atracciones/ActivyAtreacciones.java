@@ -29,7 +29,7 @@ public class ActivyAtreacciones extends AppCompatActivity {
 
         vml = new ViewModelProvider(this).get(AtraccionesViewModel.class);
 
-        vml.setCampoPrueba("XDDDDDDDDDDDDDDDDDD");
+        //vml.setCampoPrueba();
 
         vml.getListaData().observe(this, (dato) -> {
             adapter.setResults(dato);

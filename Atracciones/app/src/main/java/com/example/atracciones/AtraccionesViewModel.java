@@ -17,15 +17,9 @@ public class AtraccionesViewModel extends ViewModel {
     private LiveData<AtraccionesRpuesta> detalleData;
     private AtraccionesRepository repository = AtraccionesRepository.getInstance();
 
-    private String campoPrueba;
 
-    public void setCampoPrueba(String campoPrueba) {
-        repository.setPrueba(campoPrueba);
-    }
 
-    public String getCampoPrueba() {
-        return repository.getPrueba();
-    }
+
 
     public void init(){
         repository=new AtraccionesRepository();
