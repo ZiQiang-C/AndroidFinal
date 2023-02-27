@@ -19,15 +19,6 @@ public class AtraccionesRepository {
     private  AtraccionesService atraccionesService;
     private  MutableLiveData<List<AtraccionesRpuesta>> atraccionLiveData;
     private  MutableLiveData<AtraccionesRpuesta> detalleLiveData;
-    private String prueba;
-
-    public String getPrueba() {
-        return prueba;
-    }
-
-    public void setPrueba(String prueba) {
-        this.prueba = prueba;
-    }
 
     public AtraccionesRepository(){
         atraccionLiveData = new MutableLiveData<>();
