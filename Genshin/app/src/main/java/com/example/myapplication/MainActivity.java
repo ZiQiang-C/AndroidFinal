@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity implements PesonajeAdapter.o
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+       // getSupportActionBar().hide();
         lista = findViewById(R.id.Recye);
 
         lista.setLayoutManager(new LinearLayoutManager(this));
