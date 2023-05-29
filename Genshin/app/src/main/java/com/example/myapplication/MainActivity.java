@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements PesonajeAdapter.o
 
         vml.getLista();
     }
-    @Override
+
     public void onItemClick(int position) {
 
         String nombre = adapter.getData().get(position);
